@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import ru.inversion.fx.form.controls.*?>
+<?import ru.inversion.fx.form.lov.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="5.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.inversion.test_countries.EditZagrebinEmployeesController">
+<children>
+<GridPane hgap="5.0" vgap="5.0" VBox.vgrow="ALWAYS">
+<children>
+<JInvLabel fx:id="lblEMPLOYEESID" text="%EMPLOYEESID" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+<JInvLongField fx:id="EMPLOYEESID" maxWidth="-Infinity" prefColumnCount="0" fieldName="EMPLOYEESID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+<JInvLabel fx:id="lblFULLNAME" text="%FULLNAME" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+<JInvTextField fx:id="FULLNAME" prefColumnCount="50" fieldName="FULLNAME" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+<JInvLabel fx:id="lblPOSITION" text="%POSITION" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+<JInvTextField fx:id="POSITION" prefColumnCount="50" fieldName="POSITION" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+<JInvLabel fx:id="lblPHOTO" text="%PHOTO" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+<JInvTextField fx:id="PHOTO" fieldName="PHOTO" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+<JInvLabel fx:id="lblPASSPORTSERIES" text="%PASSPORTSERIES" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+<JInvTextField fx:id="PASSPORTSERIES" maxWidth="-Infinity" prefColumnCount="10" fieldName="PASSPORTSERIES" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+<JInvLabel fx:id="lblPASSPORTNUMBER" text="%PASSPORTNUMBER" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+<JInvTextField fx:id="PASSPORTNUMBER" maxWidth="-Infinity" prefColumnCount="10" fieldName="PASSPORTNUMBER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+<JInvLabel fx:id="lblEMAIL" text="%EMAIL" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+<JInvTextField fx:id="EMAIL" prefColumnCount="50" fieldName="EMAIL" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+</children>
+<columnConstraints>
+<ColumnConstraints halignment="RIGHT" />
+<ColumnConstraints hgrow="ALWAYS" />
+</columnConstraints>
+<VBox.margin>
+<Insets />
+</VBox.margin>
+<rowConstraints>
+<RowConstraints />
+<RowConstraints />
+<RowConstraints />
+<RowConstraints />
+<RowConstraints />
+<RowConstraints />
+<RowConstraints />
+<RowConstraints minHeight="1.0"/>
+</rowConstraints>
+</GridPane>
+<ButtonBar buttonMinWidth="80.0">
+<buttons>
+<JInvButton fx:id="btOK" />
+<JInvButton fx:id="btCancel" />
+</buttons>
+</ButtonBar>
+</children>
+<padding>
+<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+</padding>
+</VBox>

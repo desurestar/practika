@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import ru.inversion.fx.form.controls.*?>
+<?import ru.inversion.fx.form.controls.combobox.*?>
+<?import ru.inversion.fx.form.lov.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="260.0" prefWidth="600.0" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.inversion.jinvfc.controller.EditParamController">
+<children>
+<GridPane hgap="5.0" vgap="5.0" VBox.vgrow="ALWAYS">
+<children>
+<JInvLabel text="%PARAMETER.NAME" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+<JInvTextField fx:id="NAME" fieldName="name" maxWidth="-Infinity" prefColumnCount="20" GridPane.columnIndex="1" />
+<JInvLabel text="%PARAMETER.POS" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+<JInvLongField fx:id="POSITION" fieldName="position" maxWidth="-Infinity" prefColumnCount="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+<JInvLabel text="IN/OUT" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+<JInvComboBoxSimple fx:id="MODE" fieldName="mode" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+<JInvLabel text="%PARAMETER.JAVATYPE" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+<JInvTextField fx:id="JAVATYPE" fieldName="javaType" prefColumnCount="10" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+<JInvLabel text="%PARAMETER.SQLTYPE" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+<JInvTextField fx:id="SQLTYPE" fieldName="sqlType" prefColumnCount="10" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+<JInvLabel text="%PARAMETER.ELEMENTTYPE" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+<JInvTextField fx:id="ELEMENTTYPE" fieldName="elementType" prefColumnCount="30" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <JInvLabel layoutX="10.0" layoutY="149.0" text="%PARAMETER.DEFAULTVALUE_SHORT" GridPane.rowIndex="6" />
+            <JInvTextField fx:id="ELEMENTTYPE1" fieldName="defaultValue" layoutX="161.0" layoutY="145.0" prefColumnCount="30" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+</children>
+<columnConstraints>
+<ColumnConstraints halignment="RIGHT" />
+<ColumnConstraints hgrow="ALWAYS" />
+</columnConstraints>
+<VBox.margin>
+<Insets />
+</VBox.margin>
+<rowConstraints>
+<RowConstraints />
+<RowConstraints />
+<RowConstraints />
+<RowConstraints />
+<RowConstraints />
+<RowConstraints />
+            <RowConstraints />
+<RowConstraints minHeight="1.0" />
+</rowConstraints>
+</GridPane>
+<ButtonBar buttonMinWidth="80.0">
+<buttons>
+<JInvButton fx:id="btOK" text="%EDIT.OK" />
+<JInvButton fx:id="btCancel" text="%EDIT.CANCEL" />
+</buttons>
+</ButtonBar>
+</children>
+<padding>
+<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+</padding>
+</VBox>

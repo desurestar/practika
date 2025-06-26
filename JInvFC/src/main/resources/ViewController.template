@@ -1,0 +1,162 @@
+package %1$s;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import ru.inversion.dataset.IDataSet;
+import ru.inversion.dataset.XXIDataSet;
+import ru.inversion.dataset.fx.DSFXAdapter;
+import ru.inversion.dataset.aggr.AggrFuncEnum;
+import ru.inversion.fx.form.controls.dsbar.DSInfoBar;
+import ru.inversion.fx.form.controls.table.toolbar.AggregatorType;
+import ru.inversion.meta.EntityMetadataFactory;
+import ru.inversion.meta.IEntityProperty;
+
+import ru.inversion.fx.form.*;
+import ru.inversion.fx.form.controls.*;
+
+import ru.inversion.bicomp.action.JInvButtonPrint;
+import ru.inversion.bicomp.action.StopExecuteActionBiCompException;
+import ru.inversion.bicomp.fxreport.ApReport;
+
+/**
+ *
+ * @author  %4$s
+ * @since   %5$s
+ */
+public class View%3$sController extends JInvFXBrowserController 
+{
+    @FXML private JInvTable<%2$s> %6$s;   
+    @FXML private JInvToolBar toolBar;
+
+%7$s 
+   
+    private final XXIDataSet<%2$s> ds%6$s = new XXIDataSet<> ();    
+//
+// initDataSet
+//    
+    private void initDataSet () throws Exception 
+    {
+        ds%6$s.setTaskContext (getTaskContext ());
+        ds%6$s.setRowClass (%2$s.class);
+    }
+//
+// Initializes the controller class.
+//
+    @Override
+    protected void init() throws Exception
+    {
+        setTitle (getBundleString ("VIEW.TITLE"));
+        
+        initDataSet ();
+        DSFXAdapter<%2$s> dsfx = DSFXAdapter.bind (ds%6$s, %6$s, null, %9$s); 
+
+        dsfx.setEnableFilter (true);
+%8$s 
+                
+        initToolBar ();
+
+        %6$s.setToolBar (toolBar);       
+        %6$s.setAction (ActionFactory.ActionTypeEnum.CREATE, (a) -> doOperation (FormModeEnum.VM_INS));
+        %6$s.setAction (ActionFactory.ActionTypeEnum.CREATE_BY, (a) -> doOperation (FormModeEnum.VM_NONE));
+        %6$s.setAction (ActionFactory.ActionTypeEnum.VIEW, (a) -> doOperation (FormModeEnum.VM_SHOW));
+        %6$s.setAction (ActionFactory.ActionTypeEnum.UPDATE, (a) -> doOperation (FormModeEnum.VM_EDIT));
+        %6$s.setAction (ActionFactory.ActionTypeEnum.DELETE, (a) -> doOperation (FormModeEnum.VM_DEL));
+        %6$s.setAction (ActionFactory.ActionTypeEnum.REFRESH, (a) -> doRefresh ());
+
+        doRefresh ();
+    }        
+//
+// doRefresh
+//    
+    private void doRefresh () 
+    {
+        %6$s.executeQuery ();
+    }
+//
+// initToolBar
+//    
+    private void initToolBar () 
+    {
+        JInvButtonPrint bp = new JInvButtonPrint (this::setPrintParam);        
+        bp.setReportTypeId (200000);
+        toolBar.getItems ().add (bp);
+
+        toolBar.setStandartActions (ActionFactory.ActionTypeEnum.CREATE, 
+                                    ActionFactory.ActionTypeEnum.CREATE_BY, 
+                                    ActionFactory.ActionTypeEnum.VIEW,
+                                    ActionFactory.ActionTypeEnum.UPDATE,
+                                    ActionFactory.ActionTypeEnum.DELETE);
+    }
+//
+// setPrintParam
+//
+    private void setPrintParam ( ApReport ap ) 
+    {
+        if (ds%6$s.isEmpty ())
+            throw new StopExecuteActionBiCompException ();
+    }
+//
+// doOperation
+//    
+    private void doOperation ( JInvFXFormController.FormModeEnum mode ) 
+    {
+        %2$s p = null;
+
+        switch (mode) {
+            case VM_INS:
+                p = new %2$s ();
+                break;
+            case VM_NONE:
+                if (ds%6$s.getCurrentRow () == null) 
+                    break;
+                mode = FormModeEnum.VM_INS;
+                p = new %2$s ();
+                for (IEntityProperty<%2$s, ?> ep : EntityMetadataFactory.getEntityMetaData (%2$s.class).getPropertiesMap ().values ())
+                    if (! (ep.isTransient () || ep.isId ()))
+                        ep.invokeSetter (p, ep.invokeGetter (ds%6$s.getCurrentRow ()));
+                break;
+            case VM_EDIT:
+            case VM_SHOW:
+            case VM_DEL:
+                p = ds%6$s.getCurrentRow ();
+                break;
+        }
+
+        if (p != null) 
+            new FXFormLauncher<> (this, Edit%3$sController.class)
+                .dataObject (p)
+                .dialogMode (mode)
+                .initProperties (getInitProperties ())
+                .callback (this::doFormResult)    
+                .doModal ();
+    }
+//
+// doFormResult 
+//
+    private void doFormResult ( JInvFXFormController.FormReturnEnum ok, JInvFXFormController<%2$s> dctl )    
+    {
+        if (JInvFXFormController.FormReturnEnum.RET_OK == ok)
+        {
+            switch (dctl.getFormMode ()) 
+            {
+                case VM_INS:
+                    ds%6$s.insertRow (dctl.getDataObject (), IDataSet.InsertRowModeEnum.AFTER_CURRENT, true);
+                    break;
+                case VM_EDIT:                
+                    ds%6$s.updateCurrentRow (dctl.getDataObject ());
+                    break;
+                case VM_DEL:
+                    ds%6$s.removeCurrentRow ();
+                    break;
+                default:
+                    break;
+            }                
+        }    
+
+        %6$s.requestFocus ();
+    }        
+//
+//
+//    
+}
+

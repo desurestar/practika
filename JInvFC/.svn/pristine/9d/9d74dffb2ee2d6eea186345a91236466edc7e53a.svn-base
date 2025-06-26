@@ -1,0 +1,45 @@
+package %1$s;
+
+import java.util.Collections;
+import java.util.Map;
+import ru.inversion.fx.form.ViewContext;
+import ru.inversion.fx.app.BaseApp;
+import ru.inversion.fx.form.FXFormLauncher;
+import ru.inversion.tc.TaskContext;
+import ru.inversion.annotation.StartMethod;
+
+/**
+ *
+ * @author  %4$s
+ * @since   %5$s
+ */
+public class %2$sMain extends BaseApp 
+{
+    
+    @Override
+    protected void showMainWindow () 
+    {
+        showView%3$s (getPrimaryViewContext (), null, Collections.emptyMap ());
+    }
+
+    @Override
+    public String getAppID () 
+    {
+        return "XXI.%2$S"; 
+    }
+    
+    public static void main (String[] args) 
+    {
+        launch (args);
+    }
+
+    @StartMethod (description = "Не поленитесь указать описание для showView%3$s, JInvDesktop будет премного благодарен") 
+    public static void showView%3$s ( ViewContext vc, TaskContext tc, Map<String, Object> map ) 
+    {
+        new FXFormLauncher<> (tc, vc, View%3$sController.class)
+            .initProperties (map)
+            .show ();
+    }
+    
+}
+

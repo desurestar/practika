@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import ru.inversion.fx.form.controls.JInvButton?>
+<?import ru.inversion.fx.form.controls.JInvLabel?>
+<?import ru.inversion.fx.form.controls.JInvTextArea?>
+<?import ru.inversion.fx.form.controls.JInvTextField?>
+
+<VBox spacing="5.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.inversion.countriescatalog.countries.DeleteCountriesController">
+<children>
+<GridPane hgap="5.0" prefHeight="161.0" prefWidth="284.0" vgap="5.0" VBox.vgrow="ALWAYS">
+<children>
+<JInvLabel fx:id="lblCDIGITAL" text="%CDIGITAL" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+<JInvTextField fx:id="CDIGITAL" fieldName="CDIGITAL" prefColumnCount="3" required="true" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+<JInvLabel fx:id="lblCALFA_2" text="%CALFA_2" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+<JInvTextField fx:id="CALFA_2" fieldName="CALFA_2" prefColumnCount="2" required="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+<JInvLabel fx:id="lblCALFA_3" text="%CALFA_3" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+<JInvTextField fx:id="CALFA_3" fieldName="CALFA_3" prefColumnCount="3" required="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+<JInvLabel fx:id="lblCSHORTNAME" text="%CSHORTNAME" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+<JInvTextField fx:id="CSHORTNAME" fieldName="CSHORTNAME" prefColumnCount="50" required="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+<JInvLabel fx:id="lblCLONGNAME" text="%CLONGNAME" GridPane.columnIndex="0" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin></JInvLabel>
+            <JInvTextArea fx:id="CLONGNAME" fieldName="CLONGNAME" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+</children>
+<columnConstraints>
+<ColumnConstraints halignment="RIGHT" maxWidth="437.0" minWidth="107.0" prefWidth="417.0" />
+<ColumnConstraints hgrow="ALWAYS" maxWidth="567.0" minWidth="237.0" prefWidth="257.0" />
+</columnConstraints>
+<VBox.margin>
+<Insets />
+</VBox.margin>
+<rowConstraints>
+<RowConstraints />
+<RowConstraints />
+<RowConstraints />
+<RowConstraints />
+<RowConstraints />
+<RowConstraints minHeight="1.0" />
+</rowConstraints>
+         <padding>
+            <Insets left="5.0" right="5.0" top="5.0" />
+         </padding>
+</GridPane>
+<ButtonBar buttonMinWidth="80.0">
+<buttons>
+<JInvButton fx:id="btOK" />
+<JInvButton fx:id="btCancel" />
+</buttons>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+</ButtonBar>
+</children>
+<padding>
+<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+</padding>
+</VBox>

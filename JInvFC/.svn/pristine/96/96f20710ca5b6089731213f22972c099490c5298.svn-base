@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import ru.inversion.fx.form.controls.*?>
+<?import ru.inversion.fx.form.controls.combobox.*?>
+<?import ru.inversion.fx.form.lov.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="600.0" prefWidth="1200.0" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.inversion.jinvfc.controller.EditProcController">
+<children>
+<GridPane hgap="5.0" vgap="5.0">
+<children>
+<JInvLabel text="%NAME_SHORT" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+<JInvTextField fx:id="NAME" fieldName="name" maxWidth="-Infinity" prefColumnCount="20" GridPane.columnIndex="1" />
+            <JInvLabel layoutX="10.0" layoutY="14.0" text="%LANG" GridPane.rowIndex="1" />
+            <JInvComboBoxSimple fx:id="LANG" fieldName="lang" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+</children>
+<columnConstraints>
+<ColumnConstraints halignment="RIGHT" />
+<ColumnConstraints hgrow="ALWAYS" />
+</columnConstraints>
+<VBox.margin>
+<Insets />
+</VBox.margin>
+<rowConstraints>
+<RowConstraints />
+            <RowConstraints />
+</rowConstraints>
+</GridPane>
+      <JInvTextArea fieldName="script" VBox.vgrow="ALWAYS">
+         <font>
+            <Font name="Courier New" size="14.0" />
+         </font>
+      </JInvTextArea>
+<ButtonBar buttonMinWidth="80.0">
+<buttons>
+<JInvButton fx:id="btOK" text="%EDIT.OK" />
+<JInvButton fx:id="btCancel" text="%EDIT.CANCEL" />
+</buttons>
+</ButtonBar>
+</children>
+<padding>
+<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+</padding>
+</VBox>

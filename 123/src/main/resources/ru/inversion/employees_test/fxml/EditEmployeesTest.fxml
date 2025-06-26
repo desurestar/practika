@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import ru.inversion.fx.form.controls.*?>
+<?import ru.inversion.fx.form.lov.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="5.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.inversion.employees_test.EditEmployeesTestController">
+<children>
+<GridPane hgap="5.0" vgap="5.0" VBox.vgrow="ALWAYS">
+<children>
+<JInvLabel fx:id="lblID" text="%ID" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+<JInvLongField fx:id="ID" maxWidth="-Infinity" prefColumnCount="0" fieldName="ID" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+<JInvLabel fx:id="lblSURNAME" text="%SURNAME" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+<JInvTextField fx:id="SURNAME" prefColumnCount="50" fieldName="SURNAME" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+<JInvLabel fx:id="lblNAME" text="%NAME" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+<JInvTextField fx:id="NAME" prefColumnCount="50" fieldName="NAME" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+<JInvLabel fx:id="lblPATRONYMIC" text="%PATRONYMIC" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+<JInvTextField fx:id="PATRONYMIC" prefColumnCount="50" fieldName="PATRONYMIC" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+</children>
+<columnConstraints>
+<ColumnConstraints halignment="RIGHT" />
+<ColumnConstraints hgrow="ALWAYS" />
+</columnConstraints>
+<VBox.margin>
+<Insets />
+</VBox.margin>
+<rowConstraints>
+<RowConstraints />
+<RowConstraints />
+<RowConstraints />
+<RowConstraints />
+<RowConstraints minHeight="1.0"/>
+</rowConstraints>
+</GridPane>
+<ButtonBar buttonMinWidth="80.0">
+<buttons>
+<JInvButton fx:id="btOK" />
+<JInvButton fx:id="btCancel" />
+</buttons>
+</ButtonBar>
+</children>
+<padding>
+<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+</padding>
+</VBox>

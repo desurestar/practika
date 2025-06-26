@@ -1,0 +1,17 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+/*@font-face {
+   font-family: 'FontAwesome';
+   src: url('/font/fontawesome-webfont.ttf');
+}*/
+
+.mainFxmlClass {
+
+}
+.l1 {
+    -fx-font-family: 'FontAwesome';
+    -fx-font-size:16;   
+    -fx-text-fill:red;
+}

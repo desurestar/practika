@@ -1,0 +1,181 @@
+-- Таблица ZAGREBIN_Roles
+CREATE SEQUENCE ZAGREBIN_roles_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE ZAGREBIN_roles (
+    roleid NUMBER DEFAULT ZAGREBIN_roles_seq.NEXTVAL PRIMARY KEY,
+    rolename VARCHAR2(50) NOT NULL,
+    description VARCHAR2(255)
+);
+
+COMMENT ON TABLE ZAGREBIN_roles IS 'Таблица, содержащая роли пользователей.';
+COMMENT ON COLUMN ZAGREBIN_roles.roleid IS 'Идентификатор роли.';
+COMMENT ON COLUMN ZAGREBIN_roles.rolename IS 'Название роли.';
+COMMENT ON COLUMN ZAGREBIN_roles.description IS 'Описание роли.';
+
+-- Таблица ZAGREBIN_employees
+CREATE SEQUENCE ZAGREBIN_employees_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE ZAGREBIN_employees (
+    employeesid NUMBER DEFAULT ZAGREBIN_employees_seq.NEXTVAL PRIMARY KEY,
+    fullname VARCHAR2(100) NOT NULL,
+    position VARCHAR2(100),
+    photo BLOB,
+    passportseries VARCHAR2(10),
+    passportnumber VARCHAR2(10),
+    email VARCHAR2(100)
+);
+
+COMMENT ON TABLE ZAGREBIN_employees IS 'Таблица, содержащая информацию о сотрудниках.';
+COMMENT ON COLUMN ZAGREBIN_employees.employeesid IS 'Идентификатор сотрудника.';
+COMMENT ON COLUMN ZAGREBIN_employees.fullname IS 'Полное имя сотрудника.';
+COMMENT ON COLUMN ZAGREBIN_employees.position IS 'Должность сотрудника.';
+COMMENT ON COLUMN ZAGREBIN_employees.photo IS 'Фотография сотрудника.';
+COMMENT ON COLUMN ZAGREBIN_employees.passportseries IS 'Серия паспорта сотрудника.';
+COMMENT ON COLUMN ZAGREBIN_employees.passportnumber IS 'Номер паспорта сотрудника.';
+COMMENT ON COLUMN ZAGREBIN_employees.email IS 'Электронная почта сотрудника.';
+
+-- Таблица ZAGREBIN_users
+CREATE SEQUENCE ZAGREBIN_users_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE ZAGREBIN_users (
+    userid NUMBER DEFAULT ZAGREBIN_users_seq.NEXTVAL PRIMARY KEY,
+    username VARCHAR2(50) NOT NULL,
+    passwordhash VARCHAR2(255) NOT NULL,
+    roleid NUMBER,
+    tenantid NUMBER
+);
+
+COMMENT ON TABLE ZAGREBIN_users IS 'Таблица, содержащая информацию о пользователях.';
+COMMENT ON COLUMN ZAGREBIN_users.userid IS 'Идентификатор пользователя.';
+COMMENT ON COLUMN ZAGREBIN_users.username IS 'Имя пользователя.';
+COMMENT ON COLUMN ZAGREBIN_users.passwordhash IS 'Хеш пароля пользователя.';
+COMMENT ON COLUMN ZAGREBIN_users.roleid IS 'Идентификатор роли пользователя.';
+COMMENT ON COLUMN ZAGREBIN_users.tenantid IS 'Идентификатор арендатора пользователя.';
+
+-- Таблица ZAGREBIN_tenants
+CREATE SEQUENCE ZAGREBIN_tenants_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE ZAGREBIN_tenants (
+    tenantid NUMBER DEFAULT ZAGREBIN_tenants_seq.NEXTVAL PRIMARY KEY,
+    fullname VARCHAR2(100) NOT NULL,
+    userid NUMBER,
+    passportseries VARCHAR2(10),
+    passportnumber VARCHAR2(10),
+    email VARCHAR2(100)
+);
+
+COMMENT ON TABLE ZAGREBIN_tenants IS 'Таблица, содержащая информацию об арендаторах.';
+COMMENT ON COLUMN ZAGREBIN_tenants.tenantid IS 'Идентификатор арендатора.';
+COMMENT ON COLUMN ZAGREBIN_tenants.fullname IS 'Полное имя арендатора.';
+COMMENT ON COLUMN ZAGREBIN_tenants.userid IS 'Идентификатор пользователя.';
+COMMENT ON COLUMN ZAGREBIN_tenants.passportseries IS 'Серия паспорта арендатора.';
+COMMENT ON COLUMN ZAGREBIN_tenants.passportnumber IS 'Номер паспорта арендатора.';
+COMMENT ON COLUMN ZAGREBIN_tenants.email IS 'Электронная почта арендатора.';
+
+-- Таблица ZAGREBIN_warehouse
+CREATE SEQUENCE ZAGREBIN_warehouse_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE ZAGREBIN_warehouse (
+    warehousid NUMBER DEFAULT ZAGREBIN_warehouse_seq.NEXTVAL PRIMARY KEY,
+    warehousnumber VARCHAR2(50) NOT NULL,
+    status VARCHAR2(50),
+    tenantid NUMBER,
+    FOREIGN KEY (tenantid) REFERENCES ZAGREBIN_tenants(tenantid)
+);
+
+COMMENT ON TABLE ZAGREBIN_warehouse IS 'Таблица, содержащая информацию о складах.';
+COMMENT ON COLUMN ZAGREBIN_warehouse.warehousid IS 'Идентификатор склада.';
+COMMENT ON COLUMN ZAGREBIN_warehouse.warehousnumber IS 'Номер склада.';
+COMMENT ON COLUMN ZAGREBIN_warehouse.status IS 'Статус склада.';
+COMMENT ON COLUMN ZAGREBIN_warehouse.tenantid IS 'Идентификатор арендатора.';
+
+-- Таблица ZAGREBIN_salesplaces
+CREATE SEQUENCE ZAGREBIN_salesplaces_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE ZAGREBIN_salesplaces (
+    placeid NUMBER DEFAULT ZAGREBIN_salesplaces_seq.NEXTVAL PRIMARY KEY,
+    placenumber VARCHAR2(50) NOT NULL,
+    status VARCHAR2(50),
+    tenantid NUMBER,
+    rentalenddate DATE,
+    FOREIGN KEY (tenantid) REFERENCES ZAGREBIN_tenants(tenantid)
+);
+
+COMMENT ON TABLE ZAGREBIN_salesplaces IS 'Таблица, содержащая информацию об арендуемых местах.';
+COMMENT ON COLUMN ZAGREBIN_salesplaces.placeid IS 'Идентификатор арендуемого места.';
+COMMENT ON COLUMN ZAGREBIN_salesplaces.placenumber IS 'Номер арендуемого места.';
+COMMENT ON COLUMN ZAGREBIN_salesplaces.status IS 'Статус арендуемого места.';
+COMMENT ON COLUMN ZAGREBIN_salesplaces.tenantid IS 'Идентификатор арендатора.';
+COMMENT ON COLUMN ZAGREBIN_salesplaces.rentalenddate IS 'Дата окончания аренды.';
+
+-- Таблица ZAGREBIN_warehouseitems
+CREATE SEQUENCE ZAGREBIN_warehouseitems_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE ZAGREBIN_warehouseitems (
+    itemid NUMBER DEFAULT ZAGREBIN_warehouseitems_seq.NEXTVAL PRIMARY KEY,
+    name VARCHAR2(100) NOT NULL,
+    warehouseid NUMBER,
+    quantity NUMBER,
+    itemtype VARCHAR2(100),
+    expitydate DATE,
+    license VARCHAR2(100),
+    FOREIGN KEY (warehouseid) REFERENCES ZAGREBIN_warehouse(warehousid)
+);
+
+COMMENT ON TABLE ZAGREBIN_warehouseitems IS 'Таблица, содержащая информацию о складских принадлежностях.';
+COMMENT ON COLUMN ZAGREBIN_warehouseitems.itemid IS 'Идентификатор складских принадлежностей.';
+COMMENT ON COLUMN ZAGREBIN_warehouseitems.name IS 'Название складских принадлежностей.';
+COMMENT ON COLUMN ZAGREBIN_warehouseitems.warehouseid IS 'Идентификатор склада.';
+COMMENT ON COLUMN ZAGREBIN_warehouseitems.quantity IS 'Количество складских принадлежностей.';
+COMMENT ON COLUMN ZAGREBIN_warehouseitems.itemtype IS 'Тип складских принадлежностей.';
+COMMENT ON COLUMN ZAGREBIN_warehouseitems.expitydate IS 'Срок годности принадлежностей.';
+COMMENT ON COLUMN ZAGREBIN_warehouseitems.license IS 'Лицензия.';
+
+-- Таблица ZAGREBIN_equipment
+CREATE SEQUENCE ZAGREBIN_equipment_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE ZAGREBIN_equipment (
+    equipmentid NUMBER DEFAULT ZAGREBIN_equipment_seq.NEXTVAL PRIMARY KEY,
+    name VARCHAR2(100) NOT NULL,
+    status VARCHAR2(50),
+    tenantid NUMBER,
+    associatedpaceid NUMBER,
+    FOREIGN KEY (tenantid) REFERENCES ZAGREBIN_tenants(tenantid),
+    FOREIGN KEY (associatedpaceid) REFERENCES ZAGREBIN_salesplaces(placeid)
+);
+
+COMMENT ON TABLE ZAGREBIN_equipment IS 'Таблица, содержащая информацию об оборудовании.';
+COMMENT ON COLUMN ZAGREBIN_equipment.equipmentid IS 'Идентификатор оборудования.';
+COMMENT ON COLUMN ZAGREBIN_equipment.name IS 'Название оборудования.';
+COMMENT ON COLUMN ZAGREBIN_equipment.status IS 'Статус оборудования.';
+COMMENT ON COLUMN ZAGREBIN_equipment.tenantid IS 'Идентификатор арендатора.';
+COMMENT ON COLUMN ZAGREBIN_equipment.associatedpaceid IS 'Идентификатор связи места с оборудованием.';
+
+-- Таблица ZAGREBIN_sanitarycheck
+CREATE SEQUENCE ZAGREBIN_sanitarycheck_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE ZAGREBIN_sanitarycheck (
+    checkid NUMBER DEFAULT ZAGREBIN_sanitarycheck_seq.NEXTVAL PRIMARY KEY,
+    itemid NUMBER,
+    checkdate DATE,
+    result VARCHAR2(255),
+    inspectorname VARCHAR2(100),
+    FOREIGN KEY (itemid) REFERENCES ZAGREBIN_warehouseitems(itemid)
+);
+
+COMMENT ON TABLE ZAGREBIN_sanitarycheck IS 'Таблица, содержащая информацию о санитарных проверках.';
+COMMENT ON COLUMN ZAGREBIN_sanitarycheck.checkid IS 'Идентификатор санитарных проверок.';
+COMMENT ON COLUMN ZAGREBIN_sanitarycheck.itemid IS 'Идентификатор складских принадлежностей.';
+COMMENT ON COLUMN ZAGREBIN_sanitarycheck.checkdate IS 'Дата проверки.';
+COMMENT ON COLUMN ZAGREBIN_sanitarycheck.result IS 'Результат проверки.';
+COMMENT ON COLUMN ZAGREBIN_sanitarycheck.inspectorname IS 'Имя инспектора.';
+
+-- Добавление оставшихся внешних ключей
+ALTER TABLE ZAGREBIN_users
+ADD CONSTRAINT ZAGREBIN_fk_user_role FOREIGN KEY (roleid) REFERENCES ZAGREBIN_roles(roleid);
+
+ALTER TABLE ZAGREBIN_users
+ADD CONSTRAINT ZAGREBIN_fk_user_tenant FOREIGN KEY (tenantid) REFERENCES ZAGREBIN_tenants(tenantid);
+
+ALTER TABLE ZAGREBIN_tenants
+ADD CONSTRAINT ZAGREBIN_fk_tenant_user FOREIGN KEY (userid) REFERENCES ZAGREBIN_users(userid);

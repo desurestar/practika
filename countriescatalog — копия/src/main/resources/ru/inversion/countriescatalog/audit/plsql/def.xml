@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<sql_expr_list>
+    <expression name="updateCommAction" lang="PL/SQL">
+        <script><![CDATA[
+            DECLARE
+            BEGIN
+                UPDATE AUDIT_ACTION SET CAUACTIONCOMM=:cncomm where IAUACTION_ID=:nfield;
+            COMMIT;
+            END;
+        ]]></script>
+    </expression>  
+    <expression name="updateCommdata" lang="PL/SQL">
+        <script><![CDATA[
+            DECLARE
+            BEGIN
+               UPDATE AUDIT_DATA SET CAUDATACOMM=:cncomm WHERE IAUDATAACTID=:nfield AND CAUDATATABLE=:ctabel AND CAUDATAFIELD=:cfield;
+            COMMIT;
+            END;
+        ]]></script>
+    </expression>               
+</sql_expr_list>

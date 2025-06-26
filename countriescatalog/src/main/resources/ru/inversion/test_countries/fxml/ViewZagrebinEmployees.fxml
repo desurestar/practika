@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import ru.inversion.fx.form.controls.*?>
+<?import ru.inversion.fx.form.controls.dsbar.DSInfoBar?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="400.0" prefWidth="800.0" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.inversion.test_countries.ViewZagrebinEmployeesController">
+<children>
+<JInvToolBar fx:id="toolBar" />
+<JInvTable fx:id="ZAGREBIN_EMPLOYEES" tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
+<columns>
+<JInvTableColumn fx:id="FULLNAME" text="%FULLNAME" fieldName="FULLNAME" prefWidth="300.0" />
+<JInvTableColumn fx:id="POSITION" text="%POSITION" fieldName="POSITION" prefWidth="300.0" />
+<JInvTableColumn fx:id="PASSPORTSERIES" text="%PASSPORTSERIES" fieldName="PASSPORTSERIES"  />
+<JInvTableColumn fx:id="PASSPORTNUMBER" text="%PASSPORTNUMBER" fieldName="PASSPORTNUMBER"  />
+<JInvTableColumn fx:id="EMAIL" text="%EMAIL" fieldName="EMAIL" prefWidth="300.0" />
+</columns>
+<VBox.margin>
+<Insets bottom="5.0" left="5.0" right="5.0" />
+</VBox.margin>
+</JInvTable>
+</children>
+</VBox>

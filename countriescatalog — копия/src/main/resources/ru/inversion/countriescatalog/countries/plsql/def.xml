@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql_expr_list>
+    <!-- Добавление стран через CSV --> 
+    <expression name="addCSVOksm" lang = "PL/SQL">
+        <script><![CDATA[
+DECLARE 
+BEGIN
+  OKSM_PKG.INSERT_OKSM_ROWDATA_FROMCSV(:cnum,:calfa2,:calfa3,:cshname,:clnname);
+END;
+]]>
+        </script>
+    </expression>
+    <!-- Добавление страны --> 
+    <expression name="addOksm" lang = "PL/SQL">
+        <script><![CDATA[
+DECLARE 
+BEGIN
+  OKSM_PKG.INSERT_OKSM_ROWDATA(:cnum,:calfa2,:calfa3,:cshname,:clnname);
+END;
+]]>
+        </script>
+    </expression>
+    <!-- Изменение страны --> 
+    <expression name="updateOksm" lang = "PL/SQL">
+        <script><![CDATA[
+DECLARE 
+BEGIN
+  OKSM_PKG.UPDATE_OKSM_ROWDATA(:cnum,:calfa2,:calfa3,:cshname,:clnname);
+END;
+]]>
+        </script>
+    </expression>
+    <!-- Удаление страны -->
+    <expression name="deleteOksm" lang = "PL/SQL">
+        <script><![CDATA[
+DECLARE 
+BEGIN
+  OKSM_PKG.DELETE_OKSM_ROWDATA(:cnum);
+END;
+]]>
+        </script>
+    </expression>
+</sql_expr_list>

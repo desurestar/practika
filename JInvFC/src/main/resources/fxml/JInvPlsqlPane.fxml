@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import ru.inversion.fx.form.controls.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.inversion.jinvfc.controller.JInvPlsqlPaneController">
+   <children>
+      <JInvToolBar fx:id="toolBar" />
+      <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
+        <items>
+            <SplitPane dividerPositions="0.5" orientation="VERTICAL">
+              <items>
+                  <JInvTable fx:id="tabProc" tableMenuButtonVisible="true">
+                     <columns>
+                        <JInvTableColumn fx:id="name" fieldName="name" prefWidth="360.0" text="%NAME" transientColumn="false" />
+                        <JInvTableColumn fx:id="lang" fieldName="lang" prefWidth="75.0" text="%LANG" transientColumn="false" />
+                        <JInvTableColumn fx:id="lang1" fieldName="file" prefWidth="180.0" text="%FILE" transientColumn="false" />
+                     </columns>
+                  </JInvTable>
+                  <JInvTable fx:id="tabParam">
+                     <columns>
+                        <JInvTableColumn fx:id="parameter$name" fieldName="name" prefWidth="180.0" text="%PARAMETER.NAME" transientColumn="false" />
+                        <JInvTableColumnBigDecimal alignment="CENTER_RIGHT" fieldName="position" precision="0" prefWidth="50.0" text="%PARAMETER.POS" transientColumn="false" />
+                        <JInvTableColumn fieldName="mode" text="IN/OUT" transientColumn="false" />
+                        <JInvTableColumn fieldName="javaType" prefWidth="90.0" text="%PARAMETER.JAVATYPE" transientColumn="false" />
+                        <JInvTableColumn fieldName="sqlType" prefWidth="90.0" text="%PARAMETER.SQLTYPE" transientColumn="false" />
+                        <JInvTableColumn fieldName="elementType" prefWidth="160.0" text="%PARAMETER.ELEMENTTYPE" transientColumn="false" />
+                        <JInvTableColumn fx:id="parameter$name1" fieldName="defaultValue" prefWidth="360.0" text="%PARAMETER.DEFAULTVALUE" transientColumn="false" />
+                     </columns>
+                  </JInvTable>
+              </items>
+            </SplitPane>
+            <VBox spacing="5.0">
+               <children>
+                  <JInvTextArea fx:id="script" editable="false" fieldName="script" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="Courier New" size="14.0" />
+                     </font>
+                  </JInvTextArea>
+               </children>
+            </VBox>
+        </items>
+      </SplitPane>
+      <ButtonBar buttonMinWidth="80.0" nodeOrientation="RIGHT_TO_LEFT">
+        <buttons>
+          <Button mnemonicParsing="false" onAction="#onExit" text="%EXIT" />
+        </buttons>
+      </ButtonBar>
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" />
+   </padding>
+</VBox>
