@@ -1,181 +1,179 @@
--- Таблица ZAGREBIN_Roles
-CREATE SEQUENCE ZAGREBIN_roles_seq START WITH 1 INCREMENT BY 1;
+-- Создание последовательностей
+CREATE SEQUENCE Zag_SpaceType_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE Zag_SpaceStatus_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE Zag_BusinessType_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE Zag_PaymentFrequency_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE Zag_PaymentMethod_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE Zag_MaintenanceRequestStatus_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE Zag_Space_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE Zag_Tenant_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE Zag_Lease_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE Zag_Payment_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE Zag_MaintenanceRequest_seq START WITH 1 INCREMENT BY 1;
 
-CREATE TABLE ZAGREBIN_roles (
-    roleid NUMBER DEFAULT ZAGREBIN_roles_seq.NEXTVAL PRIMARY KEY,
-    rolename VARCHAR2(50) NOT NULL,
-    description VARCHAR2(255)
+-- Создание справочных таблиц
+CREATE TABLE Zag_SpaceType (
+    type_id NUMBER DEFAULT Zag_SpaceType_seq.NEXTVAL PRIMARY KEY,
+    type_name VARCHAR2(50) UNIQUE NOT NULL
 );
 
-COMMENT ON TABLE ZAGREBIN_roles IS 'Таблица, содержащая роли пользователей.';
-COMMENT ON COLUMN ZAGREBIN_roles.roleid IS 'Идентификатор роли.';
-COMMENT ON COLUMN ZAGREBIN_roles.rolename IS 'Название роли.';
-COMMENT ON COLUMN ZAGREBIN_roles.description IS 'Описание роли.';
-
--- Таблица ZAGREBIN_employees
-CREATE SEQUENCE ZAGREBIN_employees_seq START WITH 1 INCREMENT BY 1;
-
-CREATE TABLE ZAGREBIN_employees (
-    employeesid NUMBER DEFAULT ZAGREBIN_employees_seq.NEXTVAL PRIMARY KEY,
-    fullname VARCHAR2(100) NOT NULL,
-    position VARCHAR2(100),
-    photo BLOB,
-    passportseries VARCHAR2(10),
-    passportnumber VARCHAR2(10),
-    email VARCHAR2(100)
+CREATE TABLE Zag_SpaceStatus (
+    status_id NUMBER DEFAULT Zag_SpaceStatus_seq.NEXTVAL PRIMARY KEY,
+    status_name VARCHAR2(50) UNIQUE NOT NULL
 );
 
-COMMENT ON TABLE ZAGREBIN_employees IS 'Таблица, содержащая информацию о сотрудниках.';
-COMMENT ON COLUMN ZAGREBIN_employees.employeesid IS 'Идентификатор сотрудника.';
-COMMENT ON COLUMN ZAGREBIN_employees.fullname IS 'Полное имя сотрудника.';
-COMMENT ON COLUMN ZAGREBIN_employees.position IS 'Должность сотрудника.';
-COMMENT ON COLUMN ZAGREBIN_employees.photo IS 'Фотография сотрудника.';
-COMMENT ON COLUMN ZAGREBIN_employees.passportseries IS 'Серия паспорта сотрудника.';
-COMMENT ON COLUMN ZAGREBIN_employees.passportnumber IS 'Номер паспорта сотрудника.';
-COMMENT ON COLUMN ZAGREBIN_employees.email IS 'Электронная почта сотрудника.';
-
--- Таблица ZAGREBIN_users
-CREATE SEQUENCE ZAGREBIN_users_seq START WITH 1 INCREMENT BY 1;
-
-CREATE TABLE ZAGREBIN_users (
-    userid NUMBER DEFAULT ZAGREBIN_users_seq.NEXTVAL PRIMARY KEY,
-    username VARCHAR2(50) NOT NULL,
-    passwordhash VARCHAR2(255) NOT NULL,
-    roleid NUMBER,
-    tenantid NUMBER
+CREATE TABLE Zag_BusinessType (
+    business_type_id NUMBER DEFAULT Zag_BusinessType_seq.NEXTVAL PRIMARY KEY,
+    business_type_name VARCHAR2(50) UNIQUE NOT NULL
 );
 
-COMMENT ON TABLE ZAGREBIN_users IS 'Таблица, содержащая информацию о пользователях.';
-COMMENT ON COLUMN ZAGREBIN_users.userid IS 'Идентификатор пользователя.';
-COMMENT ON COLUMN ZAGREBIN_users.username IS 'Имя пользователя.';
-COMMENT ON COLUMN ZAGREBIN_users.passwordhash IS 'Хеш пароля пользователя.';
-COMMENT ON COLUMN ZAGREBIN_users.roleid IS 'Идентификатор роли пользователя.';
-COMMENT ON COLUMN ZAGREBIN_users.tenantid IS 'Идентификатор арендатора пользователя.';
-
--- Таблица ZAGREBIN_tenants
-CREATE SEQUENCE ZAGREBIN_tenants_seq START WITH 1 INCREMENT BY 1;
-
-CREATE TABLE ZAGREBIN_tenants (
-    tenantid NUMBER DEFAULT ZAGREBIN_tenants_seq.NEXTVAL PRIMARY KEY,
-    fullname VARCHAR2(100) NOT NULL,
-    userid NUMBER,
-    passportseries VARCHAR2(10),
-    passportnumber VARCHAR2(10),
-    email VARCHAR2(100)
+CREATE TABLE Zag_PaymentFrequency (
+    frequency_id NUMBER DEFAULT Zag_PaymentFrequency_seq.NEXTVAL PRIMARY KEY,
+    frequency_name VARCHAR2(50) UNIQUE NOT NULL
 );
 
-COMMENT ON TABLE ZAGREBIN_tenants IS 'Таблица, содержащая информацию об арендаторах.';
-COMMENT ON COLUMN ZAGREBIN_tenants.tenantid IS 'Идентификатор арендатора.';
-COMMENT ON COLUMN ZAGREBIN_tenants.fullname IS 'Полное имя арендатора.';
-COMMENT ON COLUMN ZAGREBIN_tenants.userid IS 'Идентификатор пользователя.';
-COMMENT ON COLUMN ZAGREBIN_tenants.passportseries IS 'Серия паспорта арендатора.';
-COMMENT ON COLUMN ZAGREBIN_tenants.passportnumber IS 'Номер паспорта арендатора.';
-COMMENT ON COLUMN ZAGREBIN_tenants.email IS 'Электронная почта арендатора.';
-
--- Таблица ZAGREBIN_warehouse
-CREATE SEQUENCE ZAGREBIN_warehouse_seq START WITH 1 INCREMENT BY 1;
-
-CREATE TABLE ZAGREBIN_warehouse (
-    warehousid NUMBER DEFAULT ZAGREBIN_warehouse_seq.NEXTVAL PRIMARY KEY,
-    warehousnumber VARCHAR2(50) NOT NULL,
-    status VARCHAR2(50),
-    tenantid NUMBER,
-    FOREIGN KEY (tenantid) REFERENCES ZAGREBIN_tenants(tenantid)
+CREATE TABLE Zag_PaymentMethod (
+    method_id NUMBER DEFAULT Zag_PaymentMethod_seq.NEXTVAL PRIMARY KEY,
+    method_name VARCHAR2(50) UNIQUE NOT NULL
 );
 
-COMMENT ON TABLE ZAGREBIN_warehouse IS 'Таблица, содержащая информацию о складах.';
-COMMENT ON COLUMN ZAGREBIN_warehouse.warehousid IS 'Идентификатор склада.';
-COMMENT ON COLUMN ZAGREBIN_warehouse.warehousnumber IS 'Номер склада.';
-COMMENT ON COLUMN ZAGREBIN_warehouse.status IS 'Статус склада.';
-COMMENT ON COLUMN ZAGREBIN_warehouse.tenantid IS 'Идентификатор арендатора.';
-
--- Таблица ZAGREBIN_salesplaces
-CREATE SEQUENCE ZAGREBIN_salesplaces_seq START WITH 1 INCREMENT BY 1;
-
-CREATE TABLE ZAGREBIN_salesplaces (
-    placeid NUMBER DEFAULT ZAGREBIN_salesplaces_seq.NEXTVAL PRIMARY KEY,
-    placenumber VARCHAR2(50) NOT NULL,
-    status VARCHAR2(50),
-    tenantid NUMBER,
-    rentalenddate DATE,
-    FOREIGN KEY (tenantid) REFERENCES ZAGREBIN_tenants(tenantid)
+CREATE TABLE Zag_MaintenanceRequestStatus (
+    status_id NUMBER DEFAULT Zag_MaintenanceRequestStatus_seq.NEXTVAL PRIMARY KEY,
+    status_name VARCHAR2(50) UNIQUE NOT NULL
 );
 
-COMMENT ON TABLE ZAGREBIN_salesplaces IS 'Таблица, содержащая информацию об арендуемых местах.';
-COMMENT ON COLUMN ZAGREBIN_salesplaces.placeid IS 'Идентификатор арендуемого места.';
-COMMENT ON COLUMN ZAGREBIN_salesplaces.placenumber IS 'Номер арендуемого места.';
-COMMENT ON COLUMN ZAGREBIN_salesplaces.status IS 'Статус арендуемого места.';
-COMMENT ON COLUMN ZAGREBIN_salesplaces.tenantid IS 'Идентификатор арендатора.';
-COMMENT ON COLUMN ZAGREBIN_salesplaces.rentalenddate IS 'Дата окончания аренды.';
+-- Создание основных таблиц
+CREATE TABLE Zag_Space (
+    space_id NUMBER DEFAULT Zag_Space_seq.NEXTVAL PRIMARY KEY,
+    area NUMBER NOT NULL,
+    location VARCHAR2(50),
+    type_id NUMBER NOT NULL,
+    status_id NUMBER NOT NULL,
+    rental_rate NUMBER NOT NULL,
+    FOREIGN KEY (type_id) REFERENCES Zag_SpaceType(type_id),
+    FOREIGN KEY (status_id) REFERENCES Zag_SpaceStatus(status_id)
+);
 
--- Таблица ZAGREBIN_warehouseitems
-CREATE SEQUENCE ZAGREBIN_warehouseitems_seq START WITH 1 INCREMENT BY 1;
-
-CREATE TABLE ZAGREBIN_warehouseitems (
-    itemid NUMBER DEFAULT ZAGREBIN_warehouseitems_seq.NEXTVAL PRIMARY KEY,
+CREATE TABLE Zag_Tenant (
+    tenant_id NUMBER DEFAULT Zag_Tenant_seq.NEXTVAL PRIMARY KEY,
     name VARCHAR2(100) NOT NULL,
-    warehouseid NUMBER,
-    quantity NUMBER,
-    itemtype VARCHAR2(100),
-    expitydate DATE,
-    license VARCHAR2(100),
-    FOREIGN KEY (warehouseid) REFERENCES ZAGREBIN_warehouse(warehousid)
+    contact_info VARCHAR2(200),
+    business_type_id NUMBER NOT NULL,
+    FOREIGN KEY (business_type_id) REFERENCES Zag_BusinessType(business_type_id)
 );
 
-COMMENT ON TABLE ZAGREBIN_warehouseitems IS 'Таблица, содержащая информацию о складских принадлежностях.';
-COMMENT ON COLUMN ZAGREBIN_warehouseitems.itemid IS 'Идентификатор складских принадлежностей.';
-COMMENT ON COLUMN ZAGREBIN_warehouseitems.name IS 'Название складских принадлежностей.';
-COMMENT ON COLUMN ZAGREBIN_warehouseitems.warehouseid IS 'Идентификатор склада.';
-COMMENT ON COLUMN ZAGREBIN_warehouseitems.quantity IS 'Количество складских принадлежностей.';
-COMMENT ON COLUMN ZAGREBIN_warehouseitems.itemtype IS 'Тип складских принадлежностей.';
-COMMENT ON COLUMN ZAGREBIN_warehouseitems.expitydate IS 'Срок годности принадлежностей.';
-COMMENT ON COLUMN ZAGREBIN_warehouseitems.license IS 'Лицензия.';
-
--- Таблица ZAGREBIN_equipment
-CREATE SEQUENCE ZAGREBIN_equipment_seq START WITH 1 INCREMENT BY 1;
-
-CREATE TABLE ZAGREBIN_equipment (
-    equipmentid NUMBER DEFAULT ZAGREBIN_equipment_seq.NEXTVAL PRIMARY KEY,
-    name VARCHAR2(100) NOT NULL,
-    status VARCHAR2(50),
-    tenantid NUMBER,
-    associatedpaceid NUMBER,
-    FOREIGN KEY (tenantid) REFERENCES ZAGREBIN_tenants(tenantid),
-    FOREIGN KEY (associatedpaceid) REFERENCES ZAGREBIN_salesplaces(placeid)
+CREATE TABLE Zag_Lease (
+    lease_id NUMBER DEFAULT Zag_Lease_seq.NEXTVAL PRIMARY KEY,
+    space_id NUMBER NOT NULL,
+    tenant_id NUMBER NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE,
+    rent_amount NUMBER NOT NULL,
+    frequency_id NUMBER NOT NULL,
+    FOREIGN KEY (space_id) REFERENCES Zag_Space(space_id),
+    FOREIGN KEY (tenant_id) REFERENCES Zag_Tenant(tenant_id),
+    FOREIGN KEY (frequency_id) REFERENCES Zag_PaymentFrequency(frequency_id)
 );
 
-COMMENT ON TABLE ZAGREBIN_equipment IS 'Таблица, содержащая информацию об оборудовании.';
-COMMENT ON COLUMN ZAGREBIN_equipment.equipmentid IS 'Идентификатор оборудования.';
-COMMENT ON COLUMN ZAGREBIN_equipment.name IS 'Название оборудования.';
-COMMENT ON COLUMN ZAGREBIN_equipment.status IS 'Статус оборудования.';
-COMMENT ON COLUMN ZAGREBIN_equipment.tenantid IS 'Идентификатор арендатора.';
-COMMENT ON COLUMN ZAGREBIN_equipment.associatedpaceid IS 'Идентификатор связи места с оборудованием.';
-
--- Таблица ZAGREBIN_sanitarycheck
-CREATE SEQUENCE ZAGREBIN_sanitarycheck_seq START WITH 1 INCREMENT BY 1;
-
-CREATE TABLE ZAGREBIN_sanitarycheck (
-    checkid NUMBER DEFAULT ZAGREBIN_sanitarycheck_seq.NEXTVAL PRIMARY KEY,
-    itemid NUMBER,
-    checkdate DATE,
-    result VARCHAR2(255),
-    inspectorname VARCHAR2(100),
-    FOREIGN KEY (itemid) REFERENCES ZAGREBIN_warehouseitems(itemid)
+CREATE TABLE Zag_Payment (
+    payment_id NUMBER DEFAULT Zag_Payment_seq.NEXTVAL PRIMARY KEY,
+    lease_id NUMBER NOT NULL,
+    amount NUMBER NOT NULL,
+    date_paid DATE NOT NULL,
+    method_id NUMBER NOT NULL,
+    FOREIGN KEY (lease_id) REFERENCES Zag_Lease(lease_id),
+    FOREIGN KEY (method_id) REFERENCES Zag_PaymentMethod(method_id)
 );
 
-COMMENT ON TABLE ZAGREBIN_sanitarycheck IS 'Таблица, содержащая информацию о санитарных проверках.';
-COMMENT ON COLUMN ZAGREBIN_sanitarycheck.checkid IS 'Идентификатор санитарных проверок.';
-COMMENT ON COLUMN ZAGREBIN_sanitarycheck.itemid IS 'Идентификатор складских принадлежностей.';
-COMMENT ON COLUMN ZAGREBIN_sanitarycheck.checkdate IS 'Дата проверки.';
-COMMENT ON COLUMN ZAGREBIN_sanitarycheck.result IS 'Результат проверки.';
-COMMENT ON COLUMN ZAGREBIN_sanitarycheck.inspectorname IS 'Имя инспектора.';
+CREATE TABLE Zag_MaintenanceRequest (
+    request_id NUMBER DEFAULT Zag_MaintenanceRequest_seq.NEXTVAL PRIMARY KEY,
+    space_id NUMBER NOT NULL,
+    description VARCHAR2(500),
+    date_requested DATE NOT NULL,
+    status_id NUMBER NOT NULL,
+    FOREIGN KEY (space_id) REFERENCES Zag_Space(space_id),
+    FOREIGN KEY (status_id) REFERENCES Zag_MaintenanceRequestStatus(status_id)
+);
 
--- Добавление оставшихся внешних ключей
-ALTER TABLE ZAGREBIN_users
-ADD CONSTRAINT ZAGREBIN_fk_user_role FOREIGN KEY (roleid) REFERENCES ZAGREBIN_roles(roleid);
+-- Вставка данных в справочные таблицы
+INSERT INTO Zag_SpaceType (type_name) VALUES ('Kiosk');
+INSERT INTO Zag_SpaceType (type_name) VALUES ('Shop');
+INSERT INTO Zag_SpaceType (type_name) VALUES ('Warehouse');
 
-ALTER TABLE ZAGREBIN_users
-ADD CONSTRAINT ZAGREBIN_fk_user_tenant FOREIGN KEY (tenantid) REFERENCES ZAGREBIN_tenants(tenantid);
+INSERT INTO Zag_SpaceStatus (status_name) VALUES ('vacant');
+INSERT INTO Zag_SpaceStatus (status_name) VALUES ('occupied');
+INSERT INTO Zag_BusinessType (business_type_name) VALUES ('Retail');
+INSERT INTO Zag_BusinessType (business_type_name) VALUES ('Food');
+INSERT INTO Zag_BusinessType (business_type_name) VALUES ('Clothing');
+INSERT INTO Zag_BusinessType (business_type_name) VALUES ('Electronics');
+INSERT INTO Zag_BusinessType (business_type_name) VALUES ('Services');
 
-ALTER TABLE ZAGREBIN_tenants
-ADD CONSTRAINT ZAGREBIN_fk_tenant_user FOREIGN KEY (userid) REFERENCES ZAGREBIN_users(userid);
+INSERT INTO Zag_PaymentFrequency (frequency_name) VALUES ('monthly');
+INSERT INTO Zag_PaymentFrequency (frequency_name) VALUES ('quarterly');
+INSERT INTO Zag_PaymentFrequency (frequency_name) VALUES ('annually');
+
+INSERT INTO Zag_PaymentMethod (method_name) VALUES ('cash');
+INSERT INTO Zag_PaymentMethod (method_name) VALUES ('card');
+INSERT INTO Zag_PaymentMethod (method_name) VALUES ('bank transfer');
+
+INSERT INTO Zag_MaintenanceRequestStatus (status_name) VALUES ('pending');
+INSERT INTO Zag_MaintenanceRequestStatus (status_name) VALUES ('in progress');
+INSERT INTO Zag_MaintenanceRequestStatus (status_name) VALUES ('completed');
+
+-- Вставка данных в основные таблицы
+INSERT INTO Zag_Space (area, location, type_id, status_id, rental_rate) 
+VALUES (50, 'Floor 1, Section A', 1, 1, 500);
+INSERT INTO Zag_Space (area, location, type_id, status_id, rental_rate) 
+VALUES (100, 'Floor 1, Section B', 2, 2, 1000);
+INSERT INTO Zag_Space (area, location, type_id, status_id, rental_rate) 
+VALUES (75, 'Floor 2, Section C', 1, 1, 750);
+INSERT INTO Zag_Space (area, location, type_id, status_id, rental_rate) 
+VALUES (150, 'Floor 2, Section D', 2, 2, 1500);
+INSERT INTO Zag_Space (area, location, type_id, status_id, rental_rate) 
+VALUES (200, 'Floor 3, Section E', 3, 1, 2000);
+
+INSERT INTO Zag_Tenant (name, contact_info, business_type_id) 
+VALUES ('John Doe', 'john@example.com, +123456789', 1);
+INSERT INTO Zag_Tenant (name, contact_info, business_type_id) 
+VALUES ('Jane Smith', 'jane@example.com, +987654321', 2);
+INSERT INTO Zag_Tenant (name, contact_info, business_type_id) 
+VALUES ('Alice Johnson', 'alice@example.com, +1122334455', 3);
+INSERT INTO Zag_Tenant (name, contact_info, business_type_id) 
+VALUES ('Bob Brown', 'bob@example.com, +5566778899', 4);
+INSERT INTO Zag_Tenant (name, contact_info, business_type_id) 
+VALUES ('Charlie Davis', 'charlie@example.com, +9988776655', 5);
+
+INSERT INTO Zag_Lease (space_id, tenant_id, start_date, end_date, rent_amount, frequency_id) 
+VALUES (1, 1, TO_DATE('2023-01-01', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'), 500, 1);
+INSERT INTO Zag_Lease (space_id, tenant_id, start_date, end_date, rent_amount, frequency_id) 
+VALUES (2, 2, TO_DATE('2023-02-01', 'YYYY-MM-DD'), TO_DATE('2023-11-30', 'YYYY-MM-DD'), 1000, 1);
+INSERT INTO Zag_Lease (space_id, tenant_id, start_date, end_date, rent_amount, frequency_id) 
+VALUES (3, 3, TO_DATE('2023-03-01', 'YYYY-MM-DD'), TO_DATE('2023-10-31', 'YYYY-MM-DD'), 750, 1);
+INSERT INTO Zag_Lease (space_id, tenant_id, start_date, end_date, rent_amount, frequency_id) 
+VALUES (4, 4, TO_DATE('2023-04-01', 'YYYY-MM-DD'), TO_DATE('2023-09-30', 'YYYY-MM-DD'), 1500, 1);
+INSERT INTO Zag_Lease (space_id, tenant_id, start_date, end_date, rent_amount, frequency_id) 
+VALUES (5, 5, TO_DATE('2023-05-01', 'YYYY-MM-DD'), TO_DATE('2023-08-31', 'YYYY-MM-DD'), 2000, 2);
+
+INSERT INTO Zag_Payment (lease_id, amount, date_paid, method_id) 
+VALUES (1, 500, TO_DATE('2023-01-15', 'YYYY-MM-DD'), 1);
+INSERT INTO Zag_Payment (lease_id, amount, date_paid, method_id) 
+VALUES (1, 500, TO_DATE('2023-02-15', 'YYYY-MM-DD'), 2);
+INSERT INTO Zag_Payment (lease_id, amount, date_paid, method_id) 
+VALUES (2, 1000, TO_DATE('2023-02-15', 'YYYY-MM-DD'), 2);
+INSERT INTO Zag_Payment (lease_id, amount, date_paid, method_id) 
+VALUES (3, 750, TO_DATE('2023-03-15', 'YYYY-MM-DD'), 3);
+INSERT INTO Zag_Payment (lease_id, amount, date_paid, method_id) 
+VALUES (4, 1500, TO_DATE('2023-04-15', 'YYYY-MM-DD'), 1);
+
+INSERT INTO Zag_MaintenanceRequest (space_id, description, date_requested, status_id) 
+VALUES (1, 'Fix lighting', TO_DATE('2023-01-10', 'YYYY-MM-DD'), 1);
+INSERT INTO Zag_MaintenanceRequest (space_id, description, date_requested, status_id) 
+VALUES (2, 'Repair door', TO_DATE('2023-02-10', 'YYYY-MM-DD'), 2);
+INSERT INTO Zag_MaintenanceRequest (space_id, description, date_requested, status_id) 
+VALUES (3, 'Paint walls', TO_DATE('2023-03-10', 'YYYY-MM-DD'), 3);
+INSERT INTO Zag_MaintenanceRequest (space_id, description, date_requested, status_id) 
+VALUES (4, 'Check plumbing', TO_DATE('2023-04-10', 'YYYY-MM-DD'), 1);
+INSERT INTO Zag_MaintenanceRequest (space_id, description, date_requested, status_id) 
+VALUES (5, 'Clean area', TO_DATE('2023-05-10', 'YYYY-MM-DD'), 2);
+
+commit;
